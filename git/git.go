@@ -1,9 +1,11 @@
 package git
 
 import (
-	"os"
-	"os/exec"
+	"github.com/Zhenyun-Tech/go-utils/utils"
+	"github.com/rs/zerolog/log"
 )
+
+var command = "git"
 
 func Clone(path, url, branch string) error {
 	args := []string{"clone", "-b", branch, url}
@@ -21,20 +23,7 @@ func Pull(path string) error {
 }
 
 func gitRun(args []string, path string) error {
-	git, err := exec.LookPath("git")
-	if err != nil {
-		return err
-	}
-	arguments := []string{git}
-	for _, a := range args {
-		arguments = append(arguments, a)
-	}
-	gitCmd := &exec.Cmd{
-		Path:   git,
-		Args:   arguments,
-		Stderr: os.Stderr,
-		Stdout: os.Stdout,
-		Dir:    path,
-	}
-	return gitCmd.Run()
+	output, err := utils.Run(command, args, path)
+	log.Info().Msg(string(output))
+	return err
 }
