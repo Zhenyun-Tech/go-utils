@@ -24,7 +24,7 @@ func Pull(path string) error {
 }
 
 func Clean(path string) error {
-	args := []string{"reset", "--hard"}
+	args := []string{"clean", "-f"}
 	return gitRun(args, path)
 }
 
