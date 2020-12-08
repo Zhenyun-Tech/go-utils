@@ -3,6 +3,7 @@ package git
 import (
 	"github.com/Zhenyun-Tech/go-utils/utils"
 	"github.com/rs/zerolog/log"
+	"strings"
 )
 
 var command = "git"
@@ -24,6 +25,6 @@ func Pull(path string) error {
 
 func gitRun(args []string, path string) error {
 	output, err := utils.Run(command, args, path)
-	log.Info().Msg(string(output))
+	log.Info().Msg(strings.TrimSpace(string(output)))
 	return err
 }
