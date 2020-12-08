@@ -30,6 +30,10 @@ func Clean(path string) error {
 
 func gitRun(args []string, path string) error {
 	output, err := utils.Run(command, args, path)
-	log.Info().Msg(strings.TrimSpace(string(output)))
+	o := strings.TrimSpace(string(output))
+	isOutNil := len(o) == 0
+	if !isOutNil {
+		log.Info().Msg(o)
+	}
 	return err
 }
