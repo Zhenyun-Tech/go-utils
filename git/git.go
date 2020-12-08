@@ -23,6 +23,11 @@ func Pull(path string) error {
 	return gitRun(args, path)
 }
 
+func Clean(path string) error {
+	args := []string{"reset", "--hard"}
+	return gitRun(args, path)
+}
+
 func gitRun(args []string, path string) error {
 	output, err := utils.Run(command, args, path)
 	log.Info().Msg(strings.TrimSpace(string(output)))
