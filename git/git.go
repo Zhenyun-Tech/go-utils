@@ -24,7 +24,12 @@ func Pull(path string) error {
 }
 
 func Clean(path string) error {
+	//清理未跟踪的文件
 	args := []string{"clean", "-f"}
+	err := gitRun(args, path)
+	utils.PanicWhenErr(err)
+	//清理已跟踪的文件
+	args = []string{"reset", "--hard"}
 	return gitRun(args, path)
 }
 
